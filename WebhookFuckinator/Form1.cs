@@ -2,6 +2,7 @@ using Newtonsoft.Json;
 using System.Collections.Specialized;
 using System.Diagnostics.Eventing.Reader;
 using System.Net;
+using System.Runtime;
 using System.Text;
 using System.Windows.Forms;
 
@@ -18,6 +19,7 @@ namespace WebhookFuckinator
         public Form1()
         {
             InitializeComponent();
+            theme_Init();
             lightToggle.Checked = true;
         }
 
@@ -167,6 +169,19 @@ namespace WebhookFuckinator
             string promptvalue = Prompt.ShowDialog("Done!", "Loaded");
         }
 
+        private void theme_Init()
+        {
+            themeList.Items.Clear();
+            themeList.BeginUpdate();
+            DirectoryInfo themeName = new DirectoryInfo("themes/");
+
+            foreach (var d in themeName.GetDirectories("*", SearchOption.AllDirectories))
+            {
+                themeList.Items.Add(d.Name);
+            }
+
+            themeList.EndUpdate();
+        }
         private void change_Color()
         {
             if (lightToggle.Checked)
@@ -206,6 +221,8 @@ namespace WebhookFuckinator
                 loadButton.ForeColor = System.Drawing.Color.FromArgb(255, 0, 0, 0);
                 savehookButton.BackColor = System.Drawing.Color.FromArgb(255, 255, 255, 255);
                 savehookButton.ForeColor = System.Drawing.Color.FromArgb(255, 0, 0, 0);
+                themeList.BackColor = System.Drawing.Color.FromArgb(255, 255, 255, 255);
+                themeList.ForeColor = System.Drawing.Color.FromArgb(255, 0, 0, 0);
 
             }
             else if (darkToggle.Checked)
@@ -245,7 +262,14 @@ namespace WebhookFuckinator
                 savehookButton.ForeColor = System.Drawing.Color.FromArgb(255, 255, 255, 255);
                 loadButton.BackColor = System.Drawing.Color.FromArgb(255, 40, 42, 47);
                 loadButton.ForeColor = System.Drawing.Color.FromArgb(255, 255, 255, 255);
+                themeList.BackColor = System.Drawing.Color.FromArgb(255, 40, 42, 47);
+                themeList.ForeColor = System.Drawing.Color.FromArgb(255, 255, 255, 255);
             }
+        }
+
+        private void themeList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 

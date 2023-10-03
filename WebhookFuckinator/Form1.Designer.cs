@@ -55,6 +55,7 @@
             label8 = new Label();
             logo = new PictureBox();
             label9 = new Label();
+            themeList = new ListBox();
             ((System.ComponentModel.ISupportInitialize)botPicture).BeginInit();
             ((System.ComponentModel.ISupportInitialize)logo).BeginInit();
             SuspendLayout();
@@ -75,7 +76,7 @@
             webhookurl.Location = new Point(421, 80);
             webhookurl.Margin = new Padding(3, 4, 3, 4);
             webhookurl.Name = "webhookurl";
-            webhookurl.Size = new Size(276, 27);
+            webhookurl.Size = new Size(276, 23);
             webhookurl.TabIndex = 2;
             // 
             // label1
@@ -84,7 +85,7 @@
             label1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             label1.Location = new Point(489, 47);
             label1.Name = "label1";
-            label1.Size = new Size(137, 28);
+            label1.Size = new Size(109, 21);
             label1.TabIndex = 3;
             label1.Text = "Webhook URL";
             // 
@@ -106,7 +107,7 @@
             label4.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             label4.Location = new Point(937, 456);
             label4.Name = "label4";
-            label4.Size = new Size(63, 28);
+            label4.Size = new Size(52, 21);
             label4.TabIndex = 8;
             label4.Text = "Errors";
             // 
@@ -135,10 +136,10 @@
             // darkToggle
             // 
             darkToggle.AutoSize = true;
-            darkToggle.Location = new Point(19, 175);
+            darkToggle.Location = new Point(419, 111);
             darkToggle.Margin = new Padding(3, 4, 3, 4);
             darkToggle.Name = "darkToggle";
-            darkToggle.Size = new Size(104, 24);
+            darkToggle.Size = new Size(83, 19);
             darkToggle.TabIndex = 11;
             darkToggle.TabStop = true;
             darkToggle.Text = "Dark Mode";
@@ -148,10 +149,10 @@
             // lightToggle
             // 
             lightToggle.AutoSize = true;
-            lightToggle.Location = new Point(19, 207);
+            lightToggle.Location = new Point(508, 111);
             lightToggle.Margin = new Padding(3, 4, 3, 4);
             lightToggle.Name = "lightToggle";
-            lightToggle.Size = new Size(106, 24);
+            lightToggle.Size = new Size(86, 19);
             lightToggle.TabIndex = 12;
             lightToggle.TabStop = true;
             lightToggle.Text = "Light Mode";
@@ -172,7 +173,7 @@
             label2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             label2.Location = new Point(898, 17);
             label2.Name = "label2";
-            label2.Size = new Size(141, 28);
+            label2.Size = new Size(114, 21);
             label2.TabIndex = 14;
             label2.Text = "Avatar Preview";
             // 
@@ -210,7 +211,7 @@
             placeholder.Multiline = true;
             placeholder.Name = "placeholder";
             placeholder.ReadOnly = true;
-            placeholder.Size = new Size(253, 245);
+            placeholder.Size = new Size(210, 245);
             placeholder.TabIndex = 19;
             placeholder.Text = "PLACEHOLDER THIS WILL BE THE OPTIONS SECTION";
             // 
@@ -228,7 +229,7 @@
             // 
             pfpurlBox.Location = new Point(898, 337);
             pfpurlBox.Name = "pfpurlBox";
-            pfpurlBox.Size = new Size(256, 27);
+            pfpurlBox.Size = new Size(256, 23);
             pfpurlBox.TabIndex = 21;
             // 
             // label3
@@ -237,7 +238,7 @@
             label3.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             label3.Location = new Point(898, 307);
             label3.Name = "label3";
-            label3.Size = new Size(109, 28);
+            label3.Size = new Size(88, 21);
             label3.TabIndex = 22;
             label3.Text = "Avatar URL";
             // 
@@ -245,7 +246,7 @@
             // 
             userBox.Location = new Point(422, 327);
             userBox.Name = "userBox";
-            userBox.Size = new Size(276, 27);
+            userBox.Size = new Size(276, 23);
             userBox.TabIndex = 23;
             // 
             // label5
@@ -254,7 +255,7 @@
             label5.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             label5.Location = new Point(421, 288);
             label5.Name = "label5";
-            label5.Size = new Size(99, 28);
+            label5.Size = new Size(81, 21);
             label5.TabIndex = 24;
             label5.Text = "Username";
             // 
@@ -263,7 +264,7 @@
             label6.AutoSize = true;
             label6.Location = new Point(64, 644);
             label6.Name = "label6";
-            label6.Size = new Size(134, 20);
+            label6.Size = new Size(105, 15);
             label6.TabIndex = 25;
             label6.Text = "Made by MeliaDev";
             label6.TextAlign = ContentAlignment.MiddleCenter;
@@ -274,17 +275,17 @@
             label7.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             label7.Location = new Point(9, 143);
             label7.Name = "label7";
-            label7.Size = new Size(78, 28);
+            label7.Size = new Size(64, 21);
             label7.TabIndex = 26;
             label7.Text = "Themes";
             // 
             // customToggle
             // 
             customToggle.AutoSize = true;
-            customToggle.Location = new Point(19, 236);
+            customToggle.Location = new Point(599, 111);
             customToggle.Margin = new Padding(2);
             customToggle.Name = "customToggle";
-            customToggle.Size = new Size(80, 24);
+            customToggle.Size = new Size(67, 19);
             customToggle.TabIndex = 27;
             customToggle.TabStop = true;
             customToggle.Text = "Custom";
@@ -297,7 +298,7 @@
             label8.Location = new Point(11, 262);
             label8.Margin = new Padding(2, 0, 2, 0);
             label8.Name = "label8";
-            label8.Size = new Size(78, 28);
+            label8.Size = new Size(62, 21);
             label8.TabIndex = 28;
             label8.Text = "Utilities";
             // 
@@ -315,16 +316,27 @@
             label9.AutoSize = true;
             label9.Location = new Point(1215, 644);
             label9.Name = "label9";
-            label9.Size = new Size(35, 20);
+            label9.Size = new Size(28, 15);
             label9.TabIndex = 30;
             label9.Text = "v0.5";
             // 
+            // themeList
+            // 
+            themeList.FormattingEnabled = true;
+            themeList.ItemHeight = 15;
+            themeList.Location = new Point(21, 165);
+            themeList.Name = "themeList";
+            themeList.Size = new Size(120, 94);
+            themeList.TabIndex = 31;
+            themeList.SelectedIndexChanged += themeList_SelectedIndexChanged;
+            // 
             // Form1
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(250, 249, 246);
             ClientSize = new Size(1262, 673);
+            Controls.Add(themeList);
             Controls.Add(label9);
             Controls.Add(logo);
             Controls.Add(label8);
@@ -391,5 +403,6 @@
         private Label label8;
         private PictureBox logo;
         private Label label9;
+        private ListBox themeList;
     }
 }
