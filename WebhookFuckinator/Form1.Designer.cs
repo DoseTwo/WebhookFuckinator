@@ -33,7 +33,7 @@
             contentBox = new RichTextBox();
             webhookurl = new TextBox();
             label1 = new Label();
-            label2 = new Label();
+            nameLabel = new Label();
             errorBox = new TextBox();
             label4 = new Label();
             button1 = new Button();
@@ -77,16 +77,16 @@
             label1.TabIndex = 3;
             label1.Text = "Webhook URL";
             // 
-            // label2
+            // nameLabel
             // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 24F, FontStyle.Regular, GraphicsUnit.Point);
-            label2.ForeColor = Color.Purple;
-            label2.Location = new Point(12, 9);
-            label2.Name = "label2";
-            label2.Size = new Size(449, 45);
-            label2.TabIndex = 4;
-            label2.Text = "The Webhook Fuckinator MK2";
+            nameLabel.AutoSize = true;
+            nameLabel.Font = new Font("Segoe UI", 24F, FontStyle.Regular, GraphicsUnit.Point);
+            nameLabel.ForeColor = Color.Purple;
+            nameLabel.Location = new Point(12, 9);
+            nameLabel.Name = "nameLabel";
+            nameLabel.Size = new Size(449, 45);
+            nameLabel.TabIndex = 4;
+            nameLabel.Text = "The Webhook Fuckinator MK2";
             // 
             // errorBox
             // 
@@ -152,7 +152,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = SystemColors.Control;
+            BackColor = Color.FromArgb(250, 249, 246);
             ClientSize = new Size(800, 450);
             Controls.Add(lightToggle);
             Controls.Add(darkToggle);
@@ -160,7 +160,7 @@
             Controls.Add(button1);
             Controls.Add(label4);
             Controls.Add(errorBox);
-            Controls.Add(label2);
+            Controls.Add(nameLabel);
             Controls.Add(label1);
             Controls.Add(webhookurl);
             Controls.Add(contentBox);
@@ -178,7 +178,7 @@
         private RichTextBox contentBox;
         private TextBox webhookurl;
         private Label label1;
-        private Label label2;
+        private Label nameLabel;
         private TextBox errorBox;
         private Label label4;
         private Button button1;

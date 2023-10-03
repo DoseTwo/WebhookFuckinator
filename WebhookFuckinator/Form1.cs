@@ -14,6 +14,7 @@ namespace WebhookFuckinator
         public Form1()
         {
             InitializeComponent();
+            lightToggle.Checked = true;
         }
 
         private void SendButton_Click(object sender, EventArgs e)
@@ -77,7 +78,19 @@ namespace WebhookFuckinator
         {
             if (lightToggle.Checked)
             {
+                this.BackColor = System.Drawing.Color.FromArgb(255, 250, 249, 246);
+                label1.ForeColor = System.Drawing.Color.FromArgb(255, 0, 0, 0);
+                label4.ForeColor = System.Drawing.Color.FromArgb(255, 0, 0, 0);
+                lightToggle.ForeColor = System.Drawing.Color.FromArgb(255, 0, 0, 0);
+                darkToggle.ForeColor = System.Drawing.Color.FromArgb(255, 0, 0, 0);
+            }
+            else if (darkToggle.Checked)
+            {
                 this.BackColor = System.Drawing.Color.FromArgb(255, 47, 49, 54);
+                label1.ForeColor = System.Drawing.Color.FromArgb(255, 255, 255, 255);
+                label4.ForeColor = System.Drawing.Color.FromArgb(255, 255, 255, 255);
+                lightToggle.ForeColor = System.Drawing.Color.FromArgb(255, 255, 255, 255);
+                darkToggle.ForeColor = System.Drawing.Color.FromArgb(255, 255, 255, 255);
             }
         }
 
