@@ -1,6 +1,7 @@
 using Newtonsoft.Json;
 using System.Collections.Specialized;
 using System.Diagnostics.Eventing.Reader;
+using System.IO;
 using System.Net;
 using System.Runtime;
 using System.Text;
@@ -20,7 +21,7 @@ namespace WebhookFuckinator
         {
             InitializeComponent();
             theme_Init();
-            lightToggle.Checked = true;
+            defaultApply();
         }
 
         private void SendButton_Click(object sender, EventArgs e)
@@ -59,14 +60,39 @@ namespace WebhookFuckinator
         {
             botPicture.Image = fetch_Image(pfpurlBox.Text);
         }
-        private void lightToggle_CheckedChanged(object sender, EventArgs e)
-        {
-            change_Color();
-        }
 
-        private void darkToggle_CheckedChanged(object sender, EventArgs e)
+        private void saveprofileButton_Click(object sender, EventArgs e)
         {
-            change_Color();
+            FolderBrowserDialog directory = new FolderBrowserDialog();
+            if (directory.ShowDialog() == DialogResult.OK)
+            {
+                string[] profile = { userBox.Text, pfpurlBox.Text };
+                if (!File.Exists(directory.SelectedPath + "/profile.txt"))
+                {
+                    File.Create(directory.SelectedPath + "/profile.txt").Close();
+                }
+                File.WriteAllLines(directory.SelectedPath + "/profile.txt", profile);
+                string promptvalue = Prompt.ShowDialog("Done!", "Saved");
+            }
+        }
+        private void loadprofileButton_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFile = new OpenFileDialog();
+            if (openFile.ShowDialog() == DialogResult.OK)
+            {
+                string[] profile = File.ReadAllLines(openFile.FileName);
+                userBox.Text = profile[0];
+                pfpurlBox.Text = profile[1];
+            }
+            string promptvalue = Prompt.ShowDialog("Done!", "Loaded");
+        }
+        private void themeapplyButton_Click(object sender, EventArgs e)
+        {
+            string themeName = Convert.ToString(themeList.SelectedItem);
+            if (themeName != "")
+                applyTheme(themeName, false);
+            else
+                errorBox.Text = "No Theme Selected!";
         }
 
         private void send_Message(string webhook, string message, string pfp_url, string username)
@@ -78,12 +104,12 @@ namespace WebhookFuckinator
                     if (pfp_url == "")
                     {
                         pfp_url = "https://cdn.discordapp.com/attachments/1158191845084504084/1158815974523416707/Untitled.png?ex=651d9efa&is=651c4d7a&hm=f2522fe1ac8b222c8c77e9801f2bd42a910abd7ae3b643c854856e3ff3942621&";
-                        errorBox.Text += "\nNo Avatar Detected, rollback to default";
+                        errorBox.Text += "\n\nNo Avatar Detected, rollback to default";
                     }
                     if (username == "")
                     {
                         username = "User";
-                        errorBox.Text += "\nNo Username Detected, rollback to default";
+                        errorBox.Text += "\n\nNo Username Detected, rollback to default";
                     }
 
                     values.Add("username", username);
@@ -182,9 +208,9 @@ namespace WebhookFuckinator
 
             themeList.EndUpdate();
         }
-        private void change_Color()
+        private void defaultApply()
         {
-            if (lightToggle.Checked)
+            if (!Directory.EnumerateFileSystemEntries("resources/applied theme").Any())
             {
                 this.BackColor = System.Drawing.Color.FromArgb(255, 250, 249, 246);
                 label1.ForeColor = System.Drawing.Color.FromArgb(255, 0, 0, 0);
@@ -196,9 +222,6 @@ namespace WebhookFuckinator
                 label7.ForeColor = System.Drawing.Color.FromArgb(255, 0, 0, 0);
                 label8.ForeColor = System.Drawing.Color.FromArgb(255, 0, 0, 0);
                 label9.ForeColor = System.Drawing.Color.FromArgb(255, 0, 0, 0);
-                lightToggle.ForeColor = System.Drawing.Color.FromArgb(255, 0, 0, 0);
-                darkToggle.ForeColor = System.Drawing.Color.FromArgb(255, 0, 0, 0);
-                customToggle.ForeColor = System.Drawing.Color.FromArgb(255, 0, 0, 0);
                 contentBox.BackColor = System.Drawing.Color.FromArgb(255, 255, 255, 255);
                 contentBox.ForeColor = System.Drawing.Color.FromArgb(255, 0, 0, 0);
                 errorBox.BackColor = System.Drawing.Color.FromArgb(255, 255, 255, 255);
@@ -223,51 +246,163 @@ namespace WebhookFuckinator
                 savehookButton.ForeColor = System.Drawing.Color.FromArgb(255, 0, 0, 0);
                 themeList.BackColor = System.Drawing.Color.FromArgb(255, 255, 255, 255);
                 themeList.ForeColor = System.Drawing.Color.FromArgb(255, 0, 0, 0);
-
             }
-            else if (darkToggle.Checked)
+            else
             {
-                this.BackColor = System.Drawing.Color.FromArgb(255, 47, 49, 54);
-                label1.ForeColor = System.Drawing.Color.FromArgb(255, 255, 255, 255);
-                label3.ForeColor = System.Drawing.Color.FromArgb(255, 255, 255, 255);
-                label4.ForeColor = System.Drawing.Color.FromArgb(255, 255, 255, 255);
-                label2.ForeColor = System.Drawing.Color.FromArgb(255, 255, 255, 255);
-                label5.ForeColor = System.Drawing.Color.FromArgb(255, 255, 255, 255);
-                label6.ForeColor = System.Drawing.Color.FromArgb(255, 255, 255, 255);
-                label7.ForeColor = System.Drawing.Color.FromArgb(255, 255, 255, 255);
-                label8.ForeColor = System.Drawing.Color.FromArgb(255, 255, 255, 255);
-                label9.ForeColor = System.Drawing.Color.FromArgb(255, 255, 255, 255);
-                lightToggle.ForeColor = System.Drawing.Color.FromArgb(255, 255, 255, 255);
-                darkToggle.ForeColor = System.Drawing.Color.FromArgb(255, 255, 255, 255);
-                customToggle.ForeColor = System.Drawing.Color.FromArgb(255, 255, 255, 255);
-                contentBox.BackColor = System.Drawing.Color.FromArgb(255, 40, 42, 47);
-                contentBox.ForeColor = System.Drawing.Color.FromArgb(255, 255, 255, 255);
-                errorBox.BackColor = System.Drawing.Color.FromArgb(255, 40, 42, 47);
-                errorBox.ForeColor = System.Drawing.Color.FromArgb(255, 255, 255, 255);
-                webhookurl.BackColor = System.Drawing.Color.FromArgb(255, 40, 42, 47);
-                webhookurl.ForeColor = System.Drawing.Color.FromArgb(255, 255, 255, 255);
-                userBox.BackColor = System.Drawing.Color.FromArgb(255, 40, 42, 47);
-                userBox.ForeColor = System.Drawing.Color.FromArgb(255, 255, 255, 255);
-                pfpurlBox.BackColor = System.Drawing.Color.FromArgb(255, 40, 42, 47);
-                pfpurlBox.ForeColor = System.Drawing.Color.FromArgb(255, 255, 255, 255);
-                sendButton.BackColor = System.Drawing.Color.FromArgb(255, 40, 42, 47);
-                sendButton.ForeColor = System.Drawing.Color.FromArgb(255, 255, 255, 255);
-                uploadButton.BackColor = System.Drawing.Color.FromArgb(255, 40, 42, 47);
-                uploadButton.ForeColor = System.Drawing.Color.FromArgb(255, 255, 255, 255);
-                avatarButton.BackColor = System.Drawing.Color.FromArgb(255, 40, 42, 47);
-                avatarButton.ForeColor = System.Drawing.Color.FromArgb(255, 255, 255, 255);
-                button1.BackColor = System.Drawing.Color.FromArgb(255, 40, 42, 47);
-                button1.ForeColor = System.Drawing.Color.FromArgb(255, 255, 255, 255);
-                savehookButton.BackColor = System.Drawing.Color.FromArgb(255, 40, 42, 47);
-                savehookButton.ForeColor = System.Drawing.Color.FromArgb(255, 255, 255, 255);
-                loadButton.BackColor = System.Drawing.Color.FromArgb(255, 40, 42, 47);
-                loadButton.ForeColor = System.Drawing.Color.FromArgb(255, 255, 255, 255);
-                themeList.BackColor = System.Drawing.Color.FromArgb(255, 40, 42, 47);
-                themeList.ForeColor = System.Drawing.Color.FromArgb(255, 255, 255, 255);
+                applyTheme("", true);
             }
         }
 
-        private void themeList_SelectedIndexChanged(object sender, EventArgs e)
+        private void applyTheme(string Name, bool startup)
+        {
+            if (!startup)
+            {
+                //loading in everything
+                string[] bg = File.ReadAllLines("themes/" + Name + "/background.txt");
+                string[] font = File.ReadAllLines("themes/" + Name + "/font color.txt");
+                string[] textbox = File.ReadAllLines("themes/" + Name + "/textbox color.txt");
+                string[] button = File.ReadAllLines("themes/" + Name + "/button color.txt");
+
+                //conversion to int cause the argb shit does that
+                int[] bg1 = convertSArraytoIArray(bg);
+                int[] font1 = convertSArraytoIArray(font);
+                int[] textbox1 = convertSArraytoIArray(textbox);
+                int[] buttonint = convertSArraytoIArray(button);
+
+                //apply theme
+                //background (yeah this is the only one)
+                this.BackColor = System.Drawing.Color.FromArgb(255, bg1[0], bg1[1], bg1[2]);
+
+                //text
+                label1.ForeColor = System.Drawing.Color.FromArgb(255, font1[0], font1[1], font1[2]);
+                label3.ForeColor = System.Drawing.Color.FromArgb(255, font1[0], font1[1], font1[2]);
+                label4.ForeColor = System.Drawing.Color.FromArgb(255, font1[0], font1[1], font1[2]);
+                label2.ForeColor = System.Drawing.Color.FromArgb(255, font1[0], font1[1], font1[2]);
+                label5.ForeColor = System.Drawing.Color.FromArgb(255, font1[0], font1[1], font1[2]);
+                label6.ForeColor = System.Drawing.Color.FromArgb(255, font1[0], font1[1], font1[2]);
+                label7.ForeColor = System.Drawing.Color.FromArgb(255, font1[0], font1[1], font1[2]);
+                label8.ForeColor = System.Drawing.Color.FromArgb(255, font1[0], font1[1], font1[2]);
+                label9.ForeColor = System.Drawing.Color.FromArgb(255, font1[0], font1[1], font1[2]);
+                contentBox.ForeColor = System.Drawing.Color.FromArgb(255, font1[0], font1[1], font1[2]);
+                errorBox.ForeColor = System.Drawing.Color.FromArgb(255, font1[0], font1[1], font1[2]);
+                webhookurl.ForeColor = System.Drawing.Color.FromArgb(255, font1[0], font1[1], font1[2]);
+                userBox.ForeColor = System.Drawing.Color.FromArgb(255, font1[0], font1[1], font1[2]);
+                pfpurlBox.ForeColor = System.Drawing.Color.FromArgb(255, font1[0], font1[1], font1[2]);
+                themeList.ForeColor = System.Drawing.Color.FromArgb(255, font1[0], font1[1], font1[2]);
+                sendButton.ForeColor = System.Drawing.Color.FromArgb(255, font1[0], font1[1], font1[2]);
+                uploadButton.ForeColor = System.Drawing.Color.FromArgb(255, font1[0], font1[1], font1[2]);
+                avatarButton.ForeColor = System.Drawing.Color.FromArgb(255, font1[0], font1[1], font1[2]);
+                button1.ForeColor = System.Drawing.Color.FromArgb(255, font1[0], font1[1], font1[2]);
+                savehookButton.ForeColor = System.Drawing.Color.FromArgb(255, font1[0], font1[1], font1[2]);
+                loadButton.ForeColor = System.Drawing.Color.FromArgb(255, font1[0], font1[1], font1[2]);
+
+                //textboxes
+                contentBox.BackColor = System.Drawing.Color.FromArgb(255, textbox1[0], textbox1[1], textbox1[2]);
+                errorBox.BackColor = System.Drawing.Color.FromArgb(255, textbox1[0], textbox1[1], textbox1[2]);
+                webhookurl.BackColor = System.Drawing.Color.FromArgb(255, textbox1[0], textbox1[1], textbox1[2]);
+                userBox.BackColor = System.Drawing.Color.FromArgb(255, textbox1[0], textbox1[1], textbox1[2]);
+                pfpurlBox.BackColor = System.Drawing.Color.FromArgb(255, textbox1[0], textbox1[1], textbox1[2]);
+                themeList.BackColor = System.Drawing.Color.FromArgb(255, textbox1[0], textbox1[1], textbox1[2]);
+
+                //buttons
+                sendButton.BackColor = System.Drawing.Color.FromArgb(255, buttonint[0], buttonint[1], buttonint[2]);
+                uploadButton.BackColor = System.Drawing.Color.FromArgb(255, buttonint[0], buttonint[1], buttonint[2]);
+                avatarButton.BackColor = System.Drawing.Color.FromArgb(255, buttonint[0], buttonint[1], buttonint[2]);
+                button1.BackColor = System.Drawing.Color.FromArgb(255, buttonint[0], buttonint[1], buttonint[2]);
+                savehookButton.BackColor = System.Drawing.Color.FromArgb(255, buttonint[0], buttonint[1], buttonint[2]);
+                loadButton.BackColor = System.Drawing.Color.FromArgb(255, buttonint[0], buttonint[1], buttonint[2]);
+
+                //save everything into the resources folder
+                string dir = "themes/";
+                Directory.Delete("resources/applied theme", true);
+                Directory.CreateDirectory("resources/applied theme");
+                int i = 0;
+                string[] copy = Directory.GetFiles("themes/" + Name, "*.txt");
+                foreach (string file in copy)
+                {
+                    string fName = file.Substring(dir.Length);
+                    string fileName = Path.GetFileName("themes/" + fName);
+                    File.Copy(Path.Combine(dir, fName), Path.Combine("resources/applied theme", fileName), true);
+                    i++;
+                }
+            }
+            else
+            {
+                //loading in everything
+                string[] bg = File.ReadAllLines("resources/applied theme/background.txt");
+                string[] font = File.ReadAllLines("resources/applied theme/font color.txt");
+                string[] textbox = File.ReadAllLines("resources/applied theme/textbox color.txt");
+                string[] button = File.ReadAllLines("resources/applied theme/button color.txt");
+
+                //conversion to int cause the argb shit does that
+                int[] bg1 = convertSArraytoIArray(bg);
+                int[] font1 = convertSArraytoIArray(font);
+                int[] textbox1 = convertSArraytoIArray(textbox);
+                int[] buttonint = convertSArraytoIArray(button);
+
+                //apply theme
+                //background (yeah this is the only one)
+                this.BackColor = System.Drawing.Color.FromArgb(255, bg1[0], bg1[1], bg1[2]);
+
+                //text
+                label1.ForeColor = System.Drawing.Color.FromArgb(255, font1[0], font1[1], font1[2]);
+                label3.ForeColor = System.Drawing.Color.FromArgb(255, font1[0], font1[1], font1[2]);
+                label4.ForeColor = System.Drawing.Color.FromArgb(255, font1[0], font1[1], font1[2]);
+                label2.ForeColor = System.Drawing.Color.FromArgb(255, font1[0], font1[1], font1[2]);
+                label5.ForeColor = System.Drawing.Color.FromArgb(255, font1[0], font1[1], font1[2]);
+                label6.ForeColor = System.Drawing.Color.FromArgb(255, font1[0], font1[1], font1[2]);
+                label7.ForeColor = System.Drawing.Color.FromArgb(255, font1[0], font1[1], font1[2]);
+                label8.ForeColor = System.Drawing.Color.FromArgb(255, font1[0], font1[1], font1[2]);
+                label9.ForeColor = System.Drawing.Color.FromArgb(255, font1[0], font1[1], font1[2]);
+                contentBox.ForeColor = System.Drawing.Color.FromArgb(255, font1[0], font1[1], font1[2]);
+                errorBox.ForeColor = System.Drawing.Color.FromArgb(255, font1[0], font1[1], font1[2]);
+                webhookurl.ForeColor = System.Drawing.Color.FromArgb(255, font1[0], font1[1], font1[2]);
+                userBox.ForeColor = System.Drawing.Color.FromArgb(255, font1[0], font1[1], font1[2]);
+                pfpurlBox.ForeColor = System.Drawing.Color.FromArgb(255, font1[0], font1[1], font1[2]);
+                themeList.ForeColor = System.Drawing.Color.FromArgb(255, font1[0], font1[1], font1[2]);
+                sendButton.ForeColor = System.Drawing.Color.FromArgb(255, font1[0], font1[1], font1[2]);
+                uploadButton.ForeColor = System.Drawing.Color.FromArgb(255, font1[0], font1[1], font1[2]);
+                avatarButton.ForeColor = System.Drawing.Color.FromArgb(255, font1[0], font1[1], font1[2]);
+                button1.ForeColor = System.Drawing.Color.FromArgb(255, font1[0], font1[1], font1[2]);
+                savehookButton.ForeColor = System.Drawing.Color.FromArgb(255, font1[0], font1[1], font1[2]);
+                loadButton.ForeColor = System.Drawing.Color.FromArgb(255, font1[0], font1[1], font1[2]);
+                loadprofileButton.ForeColor = System.Drawing.Color.FromArgb(255, font1[0], font1[1], font1[2]);
+                saveprofileButton.ForeColor = System.Drawing.Color.FromArgb(255, font1[0], font1[1], font1[2]);
+
+                //textboxes
+                contentBox.BackColor = System.Drawing.Color.FromArgb(255, textbox1[0], textbox1[1], textbox1[2]);
+                errorBox.BackColor = System.Drawing.Color.FromArgb(255, textbox1[0], textbox1[1], textbox1[2]);
+                webhookurl.BackColor = System.Drawing.Color.FromArgb(255, textbox1[0], textbox1[1], textbox1[2]);
+                userBox.BackColor = System.Drawing.Color.FromArgb(255, textbox1[0], textbox1[1], textbox1[2]);
+                pfpurlBox.BackColor = System.Drawing.Color.FromArgb(255, textbox1[0], textbox1[1], textbox1[2]);
+                themeList.BackColor = System.Drawing.Color.FromArgb(255, textbox1[0], textbox1[1], textbox1[2]);
+
+                //buttons
+                sendButton.BackColor = System.Drawing.Color.FromArgb(255, buttonint[0], buttonint[1], buttonint[2]);
+                uploadButton.BackColor = System.Drawing.Color.FromArgb(255, buttonint[0], buttonint[1], buttonint[2]);
+                avatarButton.BackColor = System.Drawing.Color.FromArgb(255, buttonint[0], buttonint[1], buttonint[2]);
+                button1.BackColor = System.Drawing.Color.FromArgb(255, buttonint[0], buttonint[1], buttonint[2]);
+                savehookButton.BackColor = System.Drawing.Color.FromArgb(255, buttonint[0], buttonint[1], buttonint[2]);
+                loadButton.BackColor = System.Drawing.Color.FromArgb(255, buttonint[0], buttonint[1], buttonint[2]);
+                saveprofileButton.BackColor = System.Drawing.Color.FromArgb(255, buttonint[0], buttonint[1], buttonint[2]);
+                loadprofileButton.BackColor = System.Drawing.Color.FromArgb(255, buttonint[0], buttonint[1], buttonint[2]);
+            }
+        }
+
+        private int[] convertSArraytoIArray(string[] array)
+        {
+            int[] convert = { 0, 0, 0, 0, 0 };
+            int i = 0;
+            foreach (string s in array)
+            {
+                convert[i] = Convert.ToInt32(s);
+                i++;
+            }
+
+            return convert;
+        }
+
+        private void webhookurl_TextChanged(object sender, EventArgs e)
         {
 
         }

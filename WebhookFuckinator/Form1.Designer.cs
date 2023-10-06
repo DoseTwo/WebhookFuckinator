@@ -36,8 +36,6 @@
             label4 = new Label();
             button1 = new Button();
             uploadButton = new Button();
-            darkToggle = new RadioButton();
-            lightToggle = new RadioButton();
             botPicture = new PictureBox();
             label2 = new Label();
             avatarButton = new Button();
@@ -51,18 +49,20 @@
             label5 = new Label();
             label6 = new Label();
             label7 = new Label();
-            customToggle = new RadioButton();
             label8 = new Label();
             logo = new PictureBox();
             label9 = new Label();
             themeList = new ListBox();
+            themeapplyButton = new Button();
+            saveprofileButton = new Button();
+            loadprofileButton = new Button();
             ((System.ComponentModel.ISupportInitialize)botPicture).BeginInit();
             ((System.ComponentModel.ISupportInitialize)logo).BeginInit();
             SuspendLayout();
             // 
             // sendButton
             // 
-            sendButton.Location = new Point(421, 543);
+            sendButton.Location = new Point(470, 543);
             sendButton.Margin = new Padding(3, 4, 3, 4);
             sendButton.Name = "sendButton";
             sendButton.Size = new Size(143, 31);
@@ -73,17 +73,18 @@
             // 
             // webhookurl
             // 
-            webhookurl.Location = new Point(421, 80);
+            webhookurl.Location = new Point(470, 72);
             webhookurl.Margin = new Padding(3, 4, 3, 4);
             webhookurl.Name = "webhookurl";
             webhookurl.Size = new Size(276, 23);
             webhookurl.TabIndex = 2;
+            webhookurl.TextChanged += webhookurl_TextChanged;
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.Location = new Point(489, 47);
+            label1.Location = new Point(549, 47);
             label1.Name = "label1";
             label1.Size = new Size(109, 21);
             label1.TabIndex = 3;
@@ -113,7 +114,7 @@
             // 
             // button1
             // 
-            button1.Location = new Point(422, 584);
+            button1.Location = new Point(470, 584);
             button1.Margin = new Padding(3, 4, 3, 4);
             button1.Name = "button1";
             button1.Size = new Size(277, 31);
@@ -124,7 +125,7 @@
             // 
             // uploadButton
             // 
-            uploadButton.Location = new Point(570, 543);
+            uploadButton.Location = new Point(620, 543);
             uploadButton.Margin = new Padding(3, 4, 3, 4);
             uploadButton.Name = "uploadButton";
             uploadButton.Size = new Size(127, 31);
@@ -132,32 +133,6 @@
             uploadButton.Text = "Upload File";
             uploadButton.UseVisualStyleBackColor = true;
             uploadButton.Click += uploadButton_Click;
-            // 
-            // darkToggle
-            // 
-            darkToggle.AutoSize = true;
-            darkToggle.Location = new Point(419, 111);
-            darkToggle.Margin = new Padding(3, 4, 3, 4);
-            darkToggle.Name = "darkToggle";
-            darkToggle.Size = new Size(83, 19);
-            darkToggle.TabIndex = 11;
-            darkToggle.TabStop = true;
-            darkToggle.Text = "Dark Mode";
-            darkToggle.UseVisualStyleBackColor = true;
-            darkToggle.CheckedChanged += darkToggle_CheckedChanged;
-            // 
-            // lightToggle
-            // 
-            lightToggle.AutoSize = true;
-            lightToggle.Location = new Point(508, 111);
-            lightToggle.Margin = new Padding(3, 4, 3, 4);
-            lightToggle.Name = "lightToggle";
-            lightToggle.Size = new Size(86, 19);
-            lightToggle.TabIndex = 12;
-            lightToggle.TabStop = true;
-            lightToggle.Text = "Light Mode";
-            lightToggle.UseVisualStyleBackColor = true;
-            lightToggle.CheckedChanged += lightToggle_CheckedChanged;
             // 
             // botPicture
             // 
@@ -179,9 +154,9 @@
             // 
             // avatarButton
             // 
-            avatarButton.Location = new Point(898, 370);
+            avatarButton.Location = new Point(898, 366);
             avatarButton.Name = "avatarButton";
-            avatarButton.Size = new Size(256, 29);
+            avatarButton.Size = new Size(256, 23);
             avatarButton.TabIndex = 15;
             avatarButton.Text = "Preview Avatar";
             avatarButton.UseVisualStyleBackColor = true;
@@ -189,7 +164,7 @@
             // 
             // contentBox
             // 
-            contentBox.Location = new Point(421, 360);
+            contentBox.Location = new Point(470, 360);
             contentBox.Multiline = true;
             contentBox.Name = "contentBox";
             contentBox.Size = new Size(276, 176);
@@ -197,9 +172,9 @@
             // 
             // savehookButton
             // 
-            savehookButton.Location = new Point(12, 293);
+            savehookButton.Location = new Point(12, 335);
             savehookButton.Name = "savehookButton";
-            savehookButton.Size = new Size(210, 29);
+            savehookButton.Size = new Size(172, 29);
             savehookButton.TabIndex = 18;
             savehookButton.Text = "Save Webhook URL to .txt";
             savehookButton.UseVisualStyleBackColor = true;
@@ -207,19 +182,19 @@
             // 
             // placeholder
             // 
-            placeholder.Location = new Point(12, 370);
+            placeholder.Location = new Point(12, 488);
             placeholder.Multiline = true;
             placeholder.Name = "placeholder";
             placeholder.ReadOnly = true;
-            placeholder.Size = new Size(210, 245);
+            placeholder.Size = new Size(210, 127);
             placeholder.TabIndex = 19;
             placeholder.Text = "PLACEHOLDER THIS WILL BE THE OPTIONS SECTION";
             // 
             // loadButton
             // 
-            loadButton.Location = new Point(12, 328);
+            loadButton.Location = new Point(12, 370);
             loadButton.Name = "loadButton";
-            loadButton.Size = new Size(210, 29);
+            loadButton.Size = new Size(172, 29);
             loadButton.TabIndex = 20;
             loadButton.Text = "Load Webhook URL from .txt";
             loadButton.UseVisualStyleBackColor = true;
@@ -244,7 +219,7 @@
             // 
             // userBox
             // 
-            userBox.Location = new Point(422, 327);
+            userBox.Location = new Point(470, 327);
             userBox.Name = "userBox";
             userBox.Size = new Size(276, 23);
             userBox.TabIndex = 23;
@@ -253,7 +228,7 @@
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label5.Location = new Point(421, 288);
+            label5.Location = new Point(470, 288);
             label5.Name = "label5";
             label5.Size = new Size(81, 21);
             label5.TabIndex = 24;
@@ -279,23 +254,11 @@
             label7.TabIndex = 26;
             label7.Text = "Themes";
             // 
-            // customToggle
-            // 
-            customToggle.AutoSize = true;
-            customToggle.Location = new Point(599, 111);
-            customToggle.Margin = new Padding(2);
-            customToggle.Name = "customToggle";
-            customToggle.Size = new Size(67, 19);
-            customToggle.TabIndex = 27;
-            customToggle.TabStop = true;
-            customToggle.Text = "Custom";
-            customToggle.UseVisualStyleBackColor = true;
-            // 
             // label8
             // 
             label8.AutoSize = true;
             label8.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label8.Location = new Point(11, 262);
+            label8.Location = new Point(9, 311);
             label8.Margin = new Padding(2, 0, 2, 0);
             label8.Name = "label8";
             label8.Size = new Size(62, 21);
@@ -318,7 +281,7 @@
             label9.Name = "label9";
             label9.Size = new Size(28, 15);
             label9.TabIndex = 30;
-            label9.Text = "v0.5";
+            label9.Text = "v0.7";
             // 
             // themeList
             // 
@@ -328,7 +291,36 @@
             themeList.Name = "themeList";
             themeList.Size = new Size(120, 94);
             themeList.TabIndex = 31;
-            themeList.SelectedIndexChanged += themeList_SelectedIndexChanged;
+            // 
+            // themeapplyButton
+            // 
+            themeapplyButton.Location = new Point(21, 265);
+            themeapplyButton.Name = "themeapplyButton";
+            themeapplyButton.Size = new Size(120, 23);
+            themeapplyButton.TabIndex = 32;
+            themeapplyButton.Text = "Apply";
+            themeapplyButton.UseVisualStyleBackColor = true;
+            themeapplyButton.Click += themeapplyButton_Click;
+            // 
+            // saveprofileButton
+            // 
+            saveprofileButton.Location = new Point(12, 405);
+            saveprofileButton.Name = "saveprofileButton";
+            saveprofileButton.Size = new Size(172, 29);
+            saveprofileButton.TabIndex = 33;
+            saveprofileButton.Text = "Save Profile to .txt";
+            saveprofileButton.UseVisualStyleBackColor = true;
+            saveprofileButton.Click += saveprofileButton_Click;
+            // 
+            // loadprofileButton
+            // 
+            loadprofileButton.Location = new Point(12, 440);
+            loadprofileButton.Name = "loadprofileButton";
+            loadprofileButton.Size = new Size(172, 29);
+            loadprofileButton.TabIndex = 34;
+            loadprofileButton.Text = "Load Profile to .txt";
+            loadprofileButton.UseVisualStyleBackColor = true;
+            loadprofileButton.Click += loadprofileButton_Click;
             // 
             // Form1
             // 
@@ -336,11 +328,13 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(250, 249, 246);
             ClientSize = new Size(1262, 673);
+            Controls.Add(loadprofileButton);
+            Controls.Add(saveprofileButton);
+            Controls.Add(themeapplyButton);
             Controls.Add(themeList);
             Controls.Add(label9);
             Controls.Add(logo);
             Controls.Add(label8);
-            Controls.Add(customToggle);
             Controls.Add(label7);
             Controls.Add(label6);
             Controls.Add(label5);
@@ -354,8 +348,6 @@
             Controls.Add(avatarButton);
             Controls.Add(label2);
             Controls.Add(botPicture);
-            Controls.Add(lightToggle);
-            Controls.Add(darkToggle);
             Controls.Add(uploadButton);
             Controls.Add(button1);
             Controls.Add(label4);
@@ -384,8 +376,6 @@
         private Label label4;
         private Button button1;
         private Button uploadButton;
-        private RadioButton darkToggle;
-        private RadioButton lightToggle;
         private PictureBox botPicture;
         private Label label2;
         private Button avatarButton;
@@ -399,10 +389,12 @@
         private Label label5;
         private Label label6;
         private Label label7;
-        private RadioButton customToggle;
         private Label label8;
         private PictureBox logo;
         private Label label9;
         private ListBox themeList;
+        private Button themeapplyButton;
+        private Button saveprofileButton;
+        private Button loadprofileButton;
     }
 }
