@@ -295,6 +295,9 @@ namespace WebhookFuckinator
                 button1.ForeColor = System.Drawing.Color.FromArgb(255, font1[0], font1[1], font1[2]);
                 savehookButton.ForeColor = System.Drawing.Color.FromArgb(255, font1[0], font1[1], font1[2]);
                 loadButton.ForeColor = System.Drawing.Color.FromArgb(255, font1[0], font1[1], font1[2]);
+                themeapplyButton.ForeColor = System.Drawing.Color.FromArgb(255, font1[0], font1[1], font1[2]);
+                loadprofileButton.ForeColor = System.Drawing.Color.FromArgb(255, font1[0], font1[1], font1[2]);
+                saveprofileButton.ForeColor = System.Drawing.Color.FromArgb(255, font1[0], font1[1], font1[2]);
 
                 //textboxes
                 contentBox.BackColor = System.Drawing.Color.FromArgb(255, textbox1[0], textbox1[1], textbox1[2]);
@@ -311,6 +314,9 @@ namespace WebhookFuckinator
                 button1.BackColor = System.Drawing.Color.FromArgb(255, buttonint[0], buttonint[1], buttonint[2]);
                 savehookButton.BackColor = System.Drawing.Color.FromArgb(255, buttonint[0], buttonint[1], buttonint[2]);
                 loadButton.BackColor = System.Drawing.Color.FromArgb(255, buttonint[0], buttonint[1], buttonint[2]);
+                themeapplyButton.BackColor = System.Drawing.Color.FromArgb(255, buttonint[0], buttonint[1], buttonint[2]);
+                saveprofileButton.BackColor = System.Drawing.Color.FromArgb(255, buttonint[0], buttonint[1], buttonint[2]);
+                loadprofileButton.BackColor = System.Drawing.Color.FromArgb(255, buttonint[0], buttonint[1], buttonint[2]);
 
                 //save everything into the resources folder
                 string dir = "themes/";
@@ -366,6 +372,7 @@ namespace WebhookFuckinator
                 button1.ForeColor = System.Drawing.Color.FromArgb(255, font1[0], font1[1], font1[2]);
                 savehookButton.ForeColor = System.Drawing.Color.FromArgb(255, font1[0], font1[1], font1[2]);
                 loadButton.ForeColor = System.Drawing.Color.FromArgb(255, font1[0], font1[1], font1[2]);
+                themeapplyButton.ForeColor = System.Drawing.Color.FromArgb(255, font1[0], font1[1], font1[2]);
                 loadprofileButton.ForeColor = System.Drawing.Color.FromArgb(255, font1[0], font1[1], font1[2]);
                 saveprofileButton.ForeColor = System.Drawing.Color.FromArgb(255, font1[0], font1[1], font1[2]);
 
@@ -384,6 +391,7 @@ namespace WebhookFuckinator
                 button1.BackColor = System.Drawing.Color.FromArgb(255, buttonint[0], buttonint[1], buttonint[2]);
                 savehookButton.BackColor = System.Drawing.Color.FromArgb(255, buttonint[0], buttonint[1], buttonint[2]);
                 loadButton.BackColor = System.Drawing.Color.FromArgb(255, buttonint[0], buttonint[1], buttonint[2]);
+                themeapplyButton.BackColor = System.Drawing.Color.FromArgb(255, buttonint[0], buttonint[1], buttonint[2]);
                 saveprofileButton.BackColor = System.Drawing.Color.FromArgb(255, buttonint[0], buttonint[1], buttonint[2]);
                 loadprofileButton.BackColor = System.Drawing.Color.FromArgb(255, buttonint[0], buttonint[1], buttonint[2]);
             }

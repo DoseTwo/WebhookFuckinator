@@ -281,7 +281,7 @@
             label9.Name = "label9";
             label9.Size = new Size(28, 15);
             label9.TabIndex = 30;
-            label9.Text = "v0.7";
+            label9.Text = "v0.9";
             // 
             // themeList
             // 
