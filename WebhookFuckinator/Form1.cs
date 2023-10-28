@@ -40,11 +40,6 @@ namespace WebhookFuckinator
 
         private void savehookButton_Click(object sender, EventArgs e)
         {
-            FolderBrowserDialog directory = new FolderBrowserDialog();
-            if (directory.ShowDialog() == DialogResult.OK)
-            {
-                save_Entry(webhookurl.Text, directory.SelectedPath, "/hook.txt");
-            }
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -66,13 +61,8 @@ namespace WebhookFuckinator
             FolderBrowserDialog directory = new FolderBrowserDialog();
             if (directory.ShowDialog() == DialogResult.OK)
             {
-                string[] profile = { userBox.Text, pfpurlBox.Text };
-                if (!File.Exists(directory.SelectedPath + "/profile.txt"))
-                {
-                    File.Create(directory.SelectedPath + "/profile.txt").Close();
-                }
-                File.WriteAllLines(directory.SelectedPath + "/profile.txt", profile);
-                string promptvalue = Prompt.ShowDialog("Done!", "Saved");
+                string[] profile = { userBox.Text, pfpurlBox.Text, webhookurl.Text };
+                save_Entry(profile, directory.SelectedPath, "/Profile.txt");
             }
         }
         private void loadprofileButton_Click(object sender, EventArgs e)
@@ -81,10 +71,16 @@ namespace WebhookFuckinator
             if (openFile.ShowDialog() == DialogResult.OK)
             {
                 string[] profile = File.ReadAllLines(openFile.FileName);
-                userBox.Text = profile[0];
-                pfpurlBox.Text = profile[1];
+                if (profile.Length != 3)
+                    errorBox.Text = "Invalid Profile Config!";
+                else
+                {
+                    userBox.Text = profile[0];
+                    pfpurlBox.Text = profile[1];
+                    webhookurl.Text = profile[2];
+                    string promptvalue = Prompt.ShowDialog("Done!", "Loaded");
+                }
             }
-            string promptvalue = Prompt.ShowDialog("Done!", "Loaded");
         }
         private void themeapplyButton_Click(object sender, EventArgs e)
         {
@@ -127,7 +123,7 @@ namespace WebhookFuckinator
                 errorBox.Text = "No Message In Box";
             }
             values.Clear();
-            contentBox.Clear();
+            //contentBox.Clear();
 
         }
 
@@ -172,11 +168,11 @@ namespace WebhookFuckinator
             Image image = Image.FromFile("resources/avatar.png");
             return image;
         }
-        private void save_Entry(string entry, string path, string file)
+        private void save_Entry(string[] entry, string path, string file)
         {
             string promptvalue;
 
-            if (file == "/hook.txt" && entry == "")
+            if (file == "/profile.txt" && entry[2] == "")
                 promptvalue = Prompt.ShowDialog("Error! No Webhook Inserted", "Error");
             else
             {
@@ -184,7 +180,7 @@ namespace WebhookFuckinator
                 {
                     File.Create(path + file).Close();
                 }
-                File.WriteAllText(path + file, entry);
+                File.WriteAllLines(path + file, entry);
                 promptvalue = Prompt.ShowDialog("Done!", "Saved");
             }
         }
@@ -240,10 +236,6 @@ namespace WebhookFuckinator
                 avatarButton.ForeColor = System.Drawing.Color.FromArgb(255, 0, 0, 0);
                 button1.BackColor = System.Drawing.Color.FromArgb(255, 255, 255, 255);
                 button1.ForeColor = System.Drawing.Color.FromArgb(255, 0, 0, 0);
-                loadButton.BackColor = System.Drawing.Color.FromArgb(255, 255, 255, 255);
-                loadButton.ForeColor = System.Drawing.Color.FromArgb(255, 0, 0, 0);
-                savehookButton.BackColor = System.Drawing.Color.FromArgb(255, 255, 255, 255);
-                savehookButton.ForeColor = System.Drawing.Color.FromArgb(255, 0, 0, 0);
                 themeList.BackColor = System.Drawing.Color.FromArgb(255, 255, 255, 255);
                 themeList.ForeColor = System.Drawing.Color.FromArgb(255, 0, 0, 0);
             }
@@ -284,7 +276,7 @@ namespace WebhookFuckinator
                 label8.ForeColor = System.Drawing.Color.FromArgb(255, font1[0], font1[1], font1[2]);
                 label9.ForeColor = System.Drawing.Color.FromArgb(255, font1[0], font1[1], font1[2]);
                 contentBox.ForeColor = System.Drawing.Color.FromArgb(255, font1[0], font1[1], font1[2]);
-                errorBox.ForeColor = System.Drawing.Color.FromArgb(255, font1[0], font1[1], font1[2]);
+                //errorBox.ForeColor = System.Drawing.Color.FromArgb(255, font1[0], font1[1], font1[2]);
                 webhookurl.ForeColor = System.Drawing.Color.FromArgb(255, font1[0], font1[1], font1[2]);
                 userBox.ForeColor = System.Drawing.Color.FromArgb(255, font1[0], font1[1], font1[2]);
                 pfpurlBox.ForeColor = System.Drawing.Color.FromArgb(255, font1[0], font1[1], font1[2]);
@@ -293,8 +285,6 @@ namespace WebhookFuckinator
                 uploadButton.ForeColor = System.Drawing.Color.FromArgb(255, font1[0], font1[1], font1[2]);
                 avatarButton.ForeColor = System.Drawing.Color.FromArgb(255, font1[0], font1[1], font1[2]);
                 button1.ForeColor = System.Drawing.Color.FromArgb(255, font1[0], font1[1], font1[2]);
-                savehookButton.ForeColor = System.Drawing.Color.FromArgb(255, font1[0], font1[1], font1[2]);
-                loadButton.ForeColor = System.Drawing.Color.FromArgb(255, font1[0], font1[1], font1[2]);
                 themeapplyButton.ForeColor = System.Drawing.Color.FromArgb(255, font1[0], font1[1], font1[2]);
                 loadprofileButton.ForeColor = System.Drawing.Color.FromArgb(255, font1[0], font1[1], font1[2]);
                 saveprofileButton.ForeColor = System.Drawing.Color.FromArgb(255, font1[0], font1[1], font1[2]);
@@ -312,8 +302,6 @@ namespace WebhookFuckinator
                 uploadButton.BackColor = System.Drawing.Color.FromArgb(255, buttonint[0], buttonint[1], buttonint[2]);
                 avatarButton.BackColor = System.Drawing.Color.FromArgb(255, buttonint[0], buttonint[1], buttonint[2]);
                 button1.BackColor = System.Drawing.Color.FromArgb(255, buttonint[0], buttonint[1], buttonint[2]);
-                savehookButton.BackColor = System.Drawing.Color.FromArgb(255, buttonint[0], buttonint[1], buttonint[2]);
-                loadButton.BackColor = System.Drawing.Color.FromArgb(255, buttonint[0], buttonint[1], buttonint[2]);
                 themeapplyButton.BackColor = System.Drawing.Color.FromArgb(255, buttonint[0], buttonint[1], buttonint[2]);
                 saveprofileButton.BackColor = System.Drawing.Color.FromArgb(255, buttonint[0], buttonint[1], buttonint[2]);
                 loadprofileButton.BackColor = System.Drawing.Color.FromArgb(255, buttonint[0], buttonint[1], buttonint[2]);
@@ -361,7 +349,7 @@ namespace WebhookFuckinator
                 label8.ForeColor = System.Drawing.Color.FromArgb(255, font1[0], font1[1], font1[2]);
                 label9.ForeColor = System.Drawing.Color.FromArgb(255, font1[0], font1[1], font1[2]);
                 contentBox.ForeColor = System.Drawing.Color.FromArgb(255, font1[0], font1[1], font1[2]);
-                errorBox.ForeColor = System.Drawing.Color.FromArgb(255, font1[0], font1[1], font1[2]);
+                //errorBox.ForeColor = System.Drawing.Color.FromArgb(255, font1[0], font1[1], font1[2]);
                 webhookurl.ForeColor = System.Drawing.Color.FromArgb(255, font1[0], font1[1], font1[2]);
                 userBox.ForeColor = System.Drawing.Color.FromArgb(255, font1[0], font1[1], font1[2]);
                 pfpurlBox.ForeColor = System.Drawing.Color.FromArgb(255, font1[0], font1[1], font1[2]);
@@ -370,8 +358,6 @@ namespace WebhookFuckinator
                 uploadButton.ForeColor = System.Drawing.Color.FromArgb(255, font1[0], font1[1], font1[2]);
                 avatarButton.ForeColor = System.Drawing.Color.FromArgb(255, font1[0], font1[1], font1[2]);
                 button1.ForeColor = System.Drawing.Color.FromArgb(255, font1[0], font1[1], font1[2]);
-                savehookButton.ForeColor = System.Drawing.Color.FromArgb(255, font1[0], font1[1], font1[2]);
-                loadButton.ForeColor = System.Drawing.Color.FromArgb(255, font1[0], font1[1], font1[2]);
                 themeapplyButton.ForeColor = System.Drawing.Color.FromArgb(255, font1[0], font1[1], font1[2]);
                 loadprofileButton.ForeColor = System.Drawing.Color.FromArgb(255, font1[0], font1[1], font1[2]);
                 saveprofileButton.ForeColor = System.Drawing.Color.FromArgb(255, font1[0], font1[1], font1[2]);
@@ -389,8 +375,6 @@ namespace WebhookFuckinator
                 uploadButton.BackColor = System.Drawing.Color.FromArgb(255, buttonint[0], buttonint[1], buttonint[2]);
                 avatarButton.BackColor = System.Drawing.Color.FromArgb(255, buttonint[0], buttonint[1], buttonint[2]);
                 button1.BackColor = System.Drawing.Color.FromArgb(255, buttonint[0], buttonint[1], buttonint[2]);
-                savehookButton.BackColor = System.Drawing.Color.FromArgb(255, buttonint[0], buttonint[1], buttonint[2]);
-                loadButton.BackColor = System.Drawing.Color.FromArgb(255, buttonint[0], buttonint[1], buttonint[2]);
                 themeapplyButton.BackColor = System.Drawing.Color.FromArgb(255, buttonint[0], buttonint[1], buttonint[2]);
                 saveprofileButton.BackColor = System.Drawing.Color.FromArgb(255, buttonint[0], buttonint[1], buttonint[2]);
                 loadprofileButton.BackColor = System.Drawing.Color.FromArgb(255, buttonint[0], buttonint[1], buttonint[2]);

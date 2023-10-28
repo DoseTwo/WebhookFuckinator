@@ -40,9 +40,6 @@
             label2 = new Label();
             avatarButton = new Button();
             contentBox = new TextBox();
-            savehookButton = new Button();
-            placeholder = new TextBox();
-            loadButton = new Button();
             pfpurlBox = new TextBox();
             label3 = new Label();
             userBox = new TextBox();
@@ -92,7 +89,7 @@
             // 
             // errorBox
             // 
-            errorBox.Enabled = false;
+            errorBox.ForeColor = Color.Red;
             errorBox.Location = new Point(937, 488);
             errorBox.Margin = new Padding(3, 4, 3, 4);
             errorBox.Multiline = true;
@@ -169,36 +166,6 @@
             contentBox.Name = "contentBox";
             contentBox.Size = new Size(276, 176);
             contentBox.TabIndex = 17;
-            // 
-            // savehookButton
-            // 
-            savehookButton.Location = new Point(12, 335);
-            savehookButton.Name = "savehookButton";
-            savehookButton.Size = new Size(172, 29);
-            savehookButton.TabIndex = 18;
-            savehookButton.Text = "Save Webhook URL to .txt";
-            savehookButton.UseVisualStyleBackColor = true;
-            savehookButton.Click += savehookButton_Click;
-            // 
-            // placeholder
-            // 
-            placeholder.Location = new Point(12, 488);
-            placeholder.Multiline = true;
-            placeholder.Name = "placeholder";
-            placeholder.ReadOnly = true;
-            placeholder.Size = new Size(210, 127);
-            placeholder.TabIndex = 19;
-            placeholder.Text = "PLACEHOLDER THIS WILL BE THE OPTIONS SECTION";
-            // 
-            // loadButton
-            // 
-            loadButton.Location = new Point(12, 370);
-            loadButton.Name = "loadButton";
-            loadButton.Size = new Size(172, 29);
-            loadButton.TabIndex = 20;
-            loadButton.Text = "Load Webhook URL from .txt";
-            loadButton.UseVisualStyleBackColor = true;
-            loadButton.Click += button2_Click;
             // 
             // pfpurlBox
             // 
@@ -281,7 +248,7 @@
             label9.Name = "label9";
             label9.Size = new Size(28, 15);
             label9.TabIndex = 30;
-            label9.Text = "v0.9";
+            label9.Text = "v1.0";
             // 
             // themeList
             // 
@@ -304,7 +271,7 @@
             // 
             // saveprofileButton
             // 
-            saveprofileButton.Location = new Point(12, 405);
+            saveprofileButton.Location = new Point(12, 337);
             saveprofileButton.Name = "saveprofileButton";
             saveprofileButton.Size = new Size(172, 29);
             saveprofileButton.TabIndex = 33;
@@ -314,7 +281,7 @@
             // 
             // loadprofileButton
             // 
-            loadprofileButton.Location = new Point(12, 440);
+            loadprofileButton.Location = new Point(12, 372);
             loadprofileButton.Name = "loadprofileButton";
             loadprofileButton.Size = new Size(172, 29);
             loadprofileButton.TabIndex = 34;
@@ -341,9 +308,6 @@
             Controls.Add(userBox);
             Controls.Add(label3);
             Controls.Add(pfpurlBox);
-            Controls.Add(loadButton);
-            Controls.Add(placeholder);
-            Controls.Add(savehookButton);
             Controls.Add(contentBox);
             Controls.Add(avatarButton);
             Controls.Add(label2);
@@ -380,9 +344,6 @@
         private Label label2;
         private Button avatarButton;
         private TextBox contentBox;
-        private Button savehookButton;
-        private TextBox placeholder;
-        private Button loadButton;
         private TextBox pfpurlBox;
         private Label label3;
         private TextBox userBox;
