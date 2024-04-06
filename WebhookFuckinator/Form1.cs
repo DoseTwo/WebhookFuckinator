@@ -195,6 +195,10 @@ namespace WebhookFuckinator
         {
             themeList.Items.Clear();
             themeList.BeginUpdate();
+            if (!Directory.Exists("themes/"))
+                Directory.CreateDirectory("themes/");
+            if (!Directory.Exists("resources/applied theme"))
+                Directory.CreateDirectory("resources/applied theme");
             DirectoryInfo themeName = new DirectoryInfo("themes/");
 
             foreach (var d in themeName.GetDirectories("*", SearchOption.AllDirectories))
